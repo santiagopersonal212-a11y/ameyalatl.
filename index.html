@@ -1,0 +1,993 @@
+```html
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ameyalatl — Filtro de Lavabo y Sistema de Recuperación en Tinaco Exterior</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            petroleum: '#0A2E2A',
+                            petroleumDark: '#051A18',
+                            sage: '#4A6B5D',
+                            sageLight: '#8CA89A',
+                            olive: '#556B2F',
+                            ivory: '#FBF9F5',
+                            stone: '#E6E2DD',
+                            sand: '#D9D3C7',
+                            graphite: '#1C2421',
+                            muted: '#5A6561',
+                            water: '#2B7A78',
+                            waterLight: '#DEF2F1'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FBF9F5;
+            color: #1C2421;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+        .glass-panel {
+            background: rgba(251, 249, 245, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-dark {
+            background: rgba(10, 46, 42, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        
+        /* Custom range slider styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: #E6E2DD;
+            height: 6px;
+            border-radius: 3px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #0A2E2A;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            transition: transform 0.2s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+        
+        .animated-water-flow {
+            stroke-dasharray: 10;
+            animation: flow 1.5s linear infinite;
+        }
+        @keyframes flow {
+            from { stroke-dashoffset: 20; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        .pulse-subtle {
+            animation: pulse-border 2.5s infinite;
+        }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(74, 107, 93, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(74, 107, 93, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 107, 93, 0); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-sage selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <nav class="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
+            <!-- Brand Logo with Native SVG Glyph -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-brand-petroleum text-brand-ivory flex items-center justify-center p-2 shadow-md transition-transform duration-500 group-hover:scale-105">
+                    <svg viewBox="0 0 100 100" class="w-full h-full fill-current">
+                        <path d="M50 10 C30 45, 20 60, 20 72 C20 88, 33 95, 50 95 C67 95, 80 88, 80 72 C80 60, 70 45, 50 10 Z" fill="none" stroke="currentColor" stroke-width="8"/>
+                        <circle cx="50" cy="40" r="6" fill="#8CA89A"/>
+                        <path d="M30 68 Q 50 55, 70 68 Q 50 80, 30 68 Z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl tracking-wider font-semibold text-brand-petroleum uppercase leading-none">Ameyalatl</span>
+                    <span class="text-[9px] tracking-[0.25em] text-brand-sage uppercase font-medium mt-1">Filtro de Lavabo & Tinaco Exterior</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center space-x-8 text-xs tracking-widest uppercase font-medium text-brand-graphite/80">
+                <a href="#inicio" class="hover:text-brand-petroleum transition-colors py-1">Inicio</a>
+                <a href="#filtro" class="hover:text-brand-petroleum transition-colors py-1">El Filtro Cilíndrico</a>
+                <a href="#tinaco-sistema" class="hover:text-brand-petroleum transition-colors py-1">Instalación y Tinaco</a>
+                <a href="#usos-practicos" class="hover:text-brand-petroleum transition-colors py-1">Usos del Agua</a>
+                <a href="#investigacion-expertos" class="hover:text-brand-petroleum transition-colors py-1">Consulta a Expertos</a>
+                <a href="#calculadora" class="hover:text-brand-petroleum transition-colors py-1">Calculadora</a>
+            </div>
+
+            <a href="#tinaco-sistema" class="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-brand-petroleum text-brand-ivory text-xs tracking-wider uppercase font-medium hover:bg-brand-sage transition-all duration-300 shadow-sm">
+                <i class="fa-solid fa-shower text-[10px] mr-2"></i> Ver Instalación
+            </a>
+
+            <button id="mobile-menu-btn" class="md:hidden text-brand-petroleum focus:outline-none p-2" aria-label="Abrir Menú">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-drawer" class="hidden md:hidden bg-brand-ivory border-b border-brand-stone px-6 py-6 space-y-4 shadow-xl">
+            <a href="#inicio" class="block text-sm uppercase tracking-wider text-brand-graphite mobile-nav-link">Inicio</a>
+            <a href="#filtro" class="block text-sm uppercase tracking-wider text-brand-graphite mobile-nav-link">El Filtro de Agua Sub-Lavabo</a>
+            <a href="#tinaco-sistema" class="block text-sm uppercase tracking-wider text-brand-graphite mobile-nav-link">El Tinaco Exterior de 500L</a>
+            <a href="#usos-practicos" class="block text-sm uppercase tracking-wider text-brand-graphite mobile-nav-link">Reuso en Riego y Limpieza</a>
+            <a href="#investigacion-expertos" class="block text-sm uppercase tracking-wider text-brand-graphite mobile-nav-link">Validación con Expertos</a>
+            <a href="#calculadora" class="block text-sm uppercase tracking-wider text-brand-graphite mobile-nav-link">Calculadora de Captación</a>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative min-h-screen flex items-center pt-28 pb-16 px-6 lg:px-12 bg-gradient-to-b from-brand-petroleum via-brand-petroleum to-brand-petroleumDark text-brand-ivory overflow-hidden">
+        
+        <!-- Hero Background Grid Pattern -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#8CA89A 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            
+            <!-- Left Hero Content -->
+            <div class="lg:col-span-6 space-y-8">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-dark text-brand-sageLight text-xs tracking-widest uppercase border border-white/10">
+                    <span class="w-2.5 h-2.5 rounded-full bg-brand-sageLight animate-pulse"></span>
+                    Sistema de Recuperación e Integración Doméstica
+                </div>
+
+                <h1 class="font-serif text-4xl sm:text-6xl lg:text-6xl font-normal leading-[1.08] tracking-tight">
+                    Filtra el agua de tu lavabo. <br>
+                    <span class="italic text-brand-sageLight font-light">Almacénala en un tinaco exterior para tu jardín.</span>
+                </h1>
+
+                <p class="text-brand-ivory/80 text-base sm:text-lg font-light leading-relaxed max-w-xl">
+                    Ameyalatl intercepta las aguas grises del lavabo del baño mediante un filtro cilíndrico con depósito químico auxiliar y las conduce automáticamente hacia un tinaco exterior de 500 litros equipado para riego y tareas del hogar.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <a href="#filtro" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-brand-ivory text-brand-petroleum font-semibold text-xs tracking-widest uppercase hover:bg-brand-sand transition-all duration-300 shadow-xl group">
+                        Ver Funcionamiento del Filtro
+                        <i class="fa-solid fa-arrow-right ml-3 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                    <a href="#tinaco-sistema" class="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-brand-ivory font-medium text-xs tracking-widest uppercase hover:bg-white/10 transition-all">
+                        <i class="fa-solid fa-database mr-2 text-brand-sageLight"></i> Ver Tinaco y Conexión
+                    </a>
+                </div>
+
+                <!-- Fast Specs Badges -->
+                <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 text-xs">
+                    <div>
+                        <span class="text-brand-sageLight font-bold block text-lg font-serif">Sub-Lavabo</span>
+                        <span class="text-brand-ivory/60">Instalación oculta</span>
+                    </div>
+                    <div>
+                        <span class="text-brand-sageLight font-bold block text-lg font-serif">500 Litros</span>
+                        <span class="text-brand-ivory/60">Tinaco exterior</span>
+                    </div>
+                    <div>
+                        <span class="text-brand-sageLight font-bold block text-lg font-serif">0% Electricidad</span>
+                        <span class="text-brand-ivory/60">Flujo por gravedad</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hero Interactive Diagram (Interactive Canvas Visual) -->
+            <div class="lg:col-span-6 bg-brand-petroleumDark/90 rounded-3xl p-6 sm:p-8 border border-brand-sage/30 shadow-2xl relative overflow-hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs uppercase tracking-widest font-semibold text-brand-sageLight">
+                        <i class="fa-solid fa-diagram-project mr-1"></i> Diagrama Esquemático Completo
+                    </span>
+                    <span class="text-[10px] bg-brand-sage/20 text-brand-sageLight px-2.5 py-1 rounded-full border border-brand-sage/30">
+                        Corte Transversal Reconstruido
+                    </span>
+                </div>
+
+                <!-- Native High-Detail SVG Rendering of Bathroom + Filter + Pipe + Exterior Tank -->
+                <div class="w-full bg-[#03110F] rounded-2xl p-4 border border-white/10 overflow-hidden shadow-inner">
+                    <svg viewBox="0 0 800 500" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Background Split: Interior (Left) vs Exterior Patio (Right) -->
+                        <rect x="0" y="0" width="420" height="500" fill="#0D2320" />
+                        <rect x="420" y="0" width="380" height="500" fill="#081A18" />
+                        
+                        <!-- Dividing Wall -->
+                        <rect x="400" y="0" width="30" height="500" fill="#2A3835" stroke="#1C2725" stroke-width="2"/>
+                        <text x="415" y="480" fill="#8CA89A" font-size="10" text-anchor="middle" font-family="sans-serif">MURO</text>
+
+                        <!-- --- INTERIOR (BAÑO) --- -->
+                        <!-- Vanity & Sink -->
+                        <rect x="30" y="160" width="340" height="15" fill="#C5A059" rx="3" />
+                        <rect x="30" y="175" width="340" height="200" fill="#18332F" stroke="#2D4D47" stroke-width="2" rx="4"/>
+                        <path d="M 100 160 Q 180 230, 260 160 Z" fill="#FBF9F5" stroke="#D9D3C7" stroke-width="3"/>
+                        <!-- Faucet -->
+                        <path d="M 180 120 L 180 150 M 180 120 Q 180 100, 160 100 L 150 100" fill="none" stroke="#E6E2DD" stroke-width="6" stroke-linecap="round"/>
+                        <!-- Water Stream -->
+                        <line x1="150" y1="105" x2="150" y2="190" stroke="#2B7A78" stroke-width="4" class="animated-water-flow" opacity="0.8"/>
+                        <text x="180" y="85" fill="#FBF9F5" font-size="12" font-weight="bold" font-family="serif">Lavabo del Baño</text>
+
+                        <!-- SUB-SINK FILTER SYSTEM -->
+                        <!-- Drain Pipe -->
+                        <path d="M 180 195 L 180 230" stroke="#8CA89A" stroke-width="8" fill="none"/>
+                        
+                        <!-- Main Cylindrical Filter -->
+                        <rect x="150" y="230" width="60" height="110" rx="8" fill="#1C403B" stroke="#8CA89A" stroke-width="2"/>
+                        <!-- Filter Layers inside cylinder -->
+                        <rect x="154" y="240" width="52" height="20" fill="#333" rx="2"/> <!-- Carbon -->
+                        <text x="180" y="254" fill="#FFF" font-size="8" text-anchor="middle">Malla + Carbón</text>
+                        
+                        <rect x="154" y="265" width="52" height="35" fill="#2B7A78" opacity="0.8" rx="2"/> <!-- Reaction Chamber -->
+                        <text x="180" y="285" fill="#FFF" font-size="8" text-anchor="middle">Desinfección</text>
+
+                        <rect x="154" y="305" width="52" height="25" fill="#556B2F" rx="2"/> <!-- Micro filter -->
+                        <text x="180" y="320" fill="#FFF" font-size="8" text-anchor="middle">Filtro Final</text>
+
+                        <!-- Auxiliary Chemical Tank (CONNECTED) -->
+                        <rect x="230" y="250" width="45" height="70" rx="6" fill="#8CA89A" stroke="#FFF" stroke-width="2"/>
+                        <rect x="240" y="242" width="25" height="8" rx="2" fill="#E6E2DD"/>
+                        <text x="252" y="280" fill="#0A2E2A" font-size="8" font-weight="bold" text-anchor="middle">Depósito</text>
+                        <text x="252" y="292" fill="#0A2E2A" font-size="7" text-anchor="middle">Químico</text>
+
+                        <!-- Connecting Pipe between aux tank & main filter -->
+                        <path d="M 230 280 L 210 280" stroke="#FFF" stroke-width="4" fill="none"/>
+
+                        <!-- Outlet Pipe running from filter through wall -->
+                        <path d="M 180 340 L 180 360 L 450 360" stroke="#2B7A78" stroke-width="8" fill="none" class="animated-water-flow"/>
+                        <text x="280" y="352" fill="#8CA89A" font-size="10" font-weight="bold">Tubería de Conducción Pasante</text>
+
+                        <!-- --- EXTERIOR (PATIO / JARDÍN) --- -->
+                        <!-- Ground / Grass -->
+                        <rect x="430" y="380" width="370" height="120" fill="#1C2E21"/>
+                        <path d="M 430 380 Q 500 375, 600 380 T 800 380 L 800 500 L 430 500 Z" fill="#2E4A34"/>
+                        <!-- Decorative Plants -->
+                        <circle cx="720" cy="350" r="25" fill="#4A6B5D" />
+                        <circle cx="750" cy="340" r="30" fill="#556B2F" />
+                        <circle cx="680" cy="360" r="18" fill="#8CA89A" />
+
+                        <!-- TINACO EXTERIOR (500 LITROS TANK) -->
+                        <rect x="490" y="200" width="140" height="180" rx="12" fill="#111" stroke="#4A6B5D" stroke-width="4"/>
+                        <!-- Tank Ribs/Rings -->
+                        <line x1="490" y1="240" x2="630" y2="240" stroke="#333" stroke-width="3"/>
+                        <line x1="490" y1="280" x2="630" y2="280" stroke="#333" stroke-width="3"/>
+                        <line x1="490" y1="320" x2="630" y2="320" stroke="#333" stroke-width="3"/>
+                        <!-- Tank Cap -->
+                        <rect x="530" y="185" width="60" height="15" rx="4" fill="#333" stroke="#8CA89A" stroke-width="1"/>
+                        <!-- Water Level Visual Indicator -->
+                        <rect x="500" y="230" width="120" height="140" rx="6" fill="#2B7A78" opacity="0.4"/>
+                        <text x="560" y="270" fill="#FFF" font-size="14" font-weight="bold" font-family="serif" text-anchor="middle">TINACO</text>
+                        <text x="560" y="290" fill="#8CA89A" font-size="12" font-weight="bold" text-anchor="middle">500 LITROS</text>
+                        <text x="560" y="310" fill="#DEF2F1" font-size="10" text-anchor="middle">Agua Tratada</text>
+
+                        <!-- Inlet into tank from pipe -->
+                        <path d="M 450 360 L 470 360 L 470 210 L 490 210" stroke="#2B7A78" stroke-width="6" fill="none"/>
+
+                        <!-- Outlet Garden Faucet (Llave de Jardín) -->
+                        <path d="M 630 350 L 670 350 L 670 370" stroke="#C5A059" stroke-width="6" fill="none"/>
+                        <!-- Valve knob -->
+                        <circle cx="670" cy="345" r="7" fill="#C5A059"/>
+                        <!-- Hose -->
+                        <path d="M 670 370 Q 680 430, 740 420" stroke="#2196F3" stroke-width="5" fill="none" stroke-dasharray="4"/>
+                        <text x="690" y="335" fill="#E6E2DD" font-size="10" font-weight="bold">Llave para Riego</text>
+                    </svg>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between text-xs text-brand-ivory/70">
+                    <span><i class="fa-solid fa-circle text-brand-sageLight text-[8px] mr-1"></i> Sub-mueble de Baño</span>
+                    <span><i class="fa-solid fa-circle text-brand-water text-[8px] mr-1"></i> Tubería Pasante</span>
+                    <span><i class="fa-solid fa-circle text-brand-sage text-[8px] mr-1"></i> Tinaco Exterior 500L</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="filtro" class="py-24 px-6 lg:px-12 bg-brand-ivory border-b border-brand-stone">
+        <div class="max-w-7xl mx-auto space-y-16">
+            
+            <div class="max-w-3xl space-y-4">
+                <span class="text-xs tracking-[0.25em] font-semibold text-brand-sage uppercase">01 / El Corazón Tecnológico</span>
+                <h2 class="font-serif text-3xl sm:text-5xl text-brand-petroleum font-normal">
+                    Filtro Cilíndrico con Depósito Químico Auxiliar
+                </h2>
+                <p class="text-brand-graphite/80 text-base sm:text-lg font-light leading-relaxed">
+                    Diseñado para colocarse directamente en la descarga del lavabo dentro del mueble de baño. Retiene impurezas físicas y acondiciona el agua antes de enviarla al exterior.
+                </p>
+            </div>
+
+            <!-- Detailed Cutaway Interactive Graphic of the Filter -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-brand-stone/30 rounded-3xl p-6 sm:p-10 border border-brand-stone shadow-sm">
+                
+                <!-- Filter Anatomy SVG Visual -->
+                <div class="lg:col-span-6 bg-white rounded-2xl p-6 border border-brand-stone shadow-md flex justify-center">
+                    <svg viewBox="0 0 500 650" class="w-full max-w-md h-auto" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Outer Casing Glass Effect -->
+                        <rect x="120" y="80" width="180" height="480" rx="30" fill="#F4F8F7" stroke="#0A2E2A" stroke-width="4"/>
+                        <rect x="130" y="90" width="160" height="460" rx="20" fill="none" stroke="#8CA89A" stroke-width="1" stroke-dasharray="4"/>
+
+                        <!-- Water Inlet Top -->
+                        <path d="M 210 20 L 210 80" stroke="#0A2E2A" stroke-width="14" fill="none"/>
+                        <path d="M 210 20 L 210 80" stroke="#2B7A78" stroke-width="6" fill="none"/>
+                        <text x="210" y="15" fill="#0A2E2A" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">1. Entrada Agua Gris (Lavabo)</text>
+
+                        <!-- Layer 1: Mesh & Coarse Filter -->
+                        <rect x="140" y="110" width="140" height="70" rx="6" fill="#2C3531"/>
+                        <circle cx="160" cy="130" r="3" fill="#FFF" opacity="0.4"/>
+                        <circle cx="190" cy="150" r="4" fill="#FFF" opacity="0.3"/>
+                        <circle cx="230" cy="135" r="3" fill="#FFF" opacity="0.5"/>
+                        <circle cx="250" cy="160" r="2" fill="#FFF" opacity="0.4"/>
+                        <text x="210" y="145" fill="#FFF" font-size="11" font-weight="bold" text-anchor="middle">Malla de Partículas</text>
+                        <text x="210" y="160" fill="#8CA89A" font-size="9" text-anchor="middle">Retiene jabón, cabello y sedimento</text>
+
+                        <!-- Layer 2: Mixing Chamber -->
+                        <rect x="140" y="190" width="140" height="180" rx="6" fill="#DEF2F1" stroke="#2B7A78" stroke-width="2"/>
+                        <!-- Water Swirls -->
+                        <path d="M 160 230 Q 210 210, 260 230 T 160 280" fill="none" stroke="#2B7A78" stroke-width="3" opacity="0.6"/>
+                        <path d="M 160 300 Q 210 280, 260 300" fill="none" stroke="#2B7A78" stroke-width="3" opacity="0.6"/>
+                        <text x="210" y="250" fill="#0A2E2A" font-size="12" font-weight="bold" text-anchor="middle">Cámara de Mezcla</text>
+                        <text x="210" y="268" fill="#4A6B5D" font-size="10" text-anchor="middle">Tratamiento Biocida / Bio-Nutriente</text>
+
+                        <!-- CONNECTED AUXILIARY CHEMICAL TANK -->
+                        <g transform="translate(320, 190)">
+                            <rect x="0" y="0" width="110" height="170" rx="12" fill="#8CA89A" stroke="#0A2E2A" stroke-width="3"/>
+                            <rect x="30" y="-12" width="50" height="12" rx="3" fill="#0A2E2A"/>
+                            <rect x="10" y="20" width="90" height="130" rx="6" fill="#FBF9F5" opacity="0.8"/>
+                            <text x="55" y="60" fill="#0A2E2A" font-size="11" font-weight="bold" text-anchor="middle">DEPÓSITO</text>
+                            <text x="55" y="75" fill="#0A2E2A" font-size="11" font-weight="bold" text-anchor="middle">AUXILIAR</text>
+                            <text x="55" y="95" fill="#556B2F" font-size="9" text-anchor="middle">Solución Rellenable</text>
+                            <text x="55" y="110" fill="#556B2F" font-size="9" text-anchor="middle">(Desinfectante/Nutrientes)</text>
+
+                            <!-- Pipe into mixing chamber -->
+                            <path d="M 0 85 L -40 85" stroke="#0A2E2A" stroke-width="6" fill="none"/>
+                            <path d="M 0 85 L -40 85" stroke="#FFF" stroke-width="2" fill="none"/>
+                        </g>
+
+                        <!-- Layer 3: Carbon Filter & Final Membrane -->
+                        <rect x="140" y="380" width="140" height="100" rx="6" fill="#1C2421"/>
+                        <text x="210" y="420" fill="#FFF" font-size="11" font-weight="bold" text-anchor="middle">Carbón Activado</text>
+                        <text x="210" y="435" fill="#8CA89A" font-size="9" text-anchor="middle">Elimina malos olores y clarifica</text>
+
+                        <!-- Water Outlet Bottom -->
+                        <path d="M 210 560 L 210 630" stroke="#0A2E2A" stroke-width="14" fill="none"/>
+                        <path d="M 210 560 L 210 630" stroke="#2B7A78" stroke-width="6" fill="none"/>
+                        <text x="210" y="645" fill="#0A2E2A" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">Salida Hacia el Tinaco Exterior</text>
+                    </svg>
+                </div>
+
+                <!-- Explanation Steps -->
+                <div class="lg:col-span-6 space-y-8">
+                    <div class="space-y-2">
+                        <span class="text-xs font-bold text-brand-sage uppercase tracking-wider">Etapas del Filtro Sub-Mueble</span>
+                        <h3 class="font-serif text-3xl text-brand-petroleum">Tratamiento Físico y Químico Continuo</h3>
+                    </div>
+
+                    <div class="space-y-6 text-sm text-brand-graphite/80 font-light">
+                        
+                        <div class="p-4 bg-brand-ivory rounded-2xl border border-brand-stone space-y-1">
+                            <span class="text-brand-petroleum font-bold block flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-brand-petroleum text-white text-xs flex items-center justify-center">1</span>
+                                Retención de Partículas Gruesas
+                            </span>
+                            <p class="text-xs text-brand-muted pl-8 leading-relaxed">
+                                La primera malla física detiene residuos sólidos de jabón de manos, crema dental y sedimentos para no saturar las etapas posteriores ni las tuberías.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-brand-ivory rounded-2xl border border-brand-sage/40 space-y-1 shadow-sm">
+                            <span class="text-brand-petroleum font-bold block flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-brand-sage text-white text-xs flex items-center justify-center">2</span>
+                                Cámara de Inyección del Depósito Auxiliar
+                            </span>
+                            <p class="text-xs text-brand-muted pl-8 leading-relaxed">
+                                El depósito lateral rellenable dosifica pasivamente una solución biodegradable. Esta formulación previene la formación de biopelículas bacterianas y malos olores durante el reposo del agua en el tinaco.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-brand-ivory rounded-2xl border border-brand-stone space-y-1">
+                            <span class="text-brand-petroleum font-bold block flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-brand-petroleum text-white text-xs flex items-center justify-center">3</span>
+                                Lecho de Carbón Activado
+                            </span>
+                            <p class="text-xs text-brand-muted pl-8 leading-relaxed">
+                                Neutraliza compuestos orgánicos volátiles, elimina la turbidez y deja el efluente cristalino antes de enviarlo al depósito exterior.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Insumos & Formulations Section -->
+            <div class="bg-brand-petroleum text-brand-ivory rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="text-xs tracking-widest font-semibold text-brand-sageLight uppercase">Soluciones Rellenables</span>
+                        <h3 class="font-serif text-3xl font-normal leading-snug">
+                            Dos Tipos de Solución para el Depósito Auxiliar
+                        </h3>
+                        <p class="text-brand-ivory/80 text-sm leading-relaxed font-light">
+                            Dependiendo del uso principal que le darás al agua almacenada en tu tinaco, el depósito lateral del filtro se puede rellenar con dos opciones formuladas:
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-2">
+                            <div class="p-5 bg-white/5 rounded-2xl border border-white/10 space-y-2">
+                                <div class="w-8 h-8 rounded-lg bg-brand-sageLight/20 text-brand-sageLight flex items-center justify-center text-base">
+                                    <i class="fa-solid fa-leaf"></i>
+                                </div>
+                                <h4 class="font-bold text-brand-sageLight text-sm">Opción A: Nutrición para Jardín</h4>
+                                <p class="text-brand-ivory/70 leading-relaxed">
+                                    Acondicionador rico en algas marinas y bio-nutrientes que neutralizan el jabón y convierten el agua del tinaco en riego fértil para plantas.
+                                </p>
+                            </div>
+
+                            <div class="p-5 bg-white/5 rounded-2xl border border-white/10 space-y-2">
+                                <div class="w-8 h-8 rounded-lg bg-brand-sageLight/20 text-brand-sageLight flex items-center justify-center text-base">
+                                    <i class="fa-solid fa-pump-medical"></i>
+                                </div>
+                                <h4 class="font-bold text-brand-sageLight text-sm">Opción B: Sanitizante Inocuo</h4>
+                                <p class="text-brand-ivory/70 leading-relaxed">
+                                    Agente biocida libre de cloro agresivo que evita malos olores en el tinaco exterior si el agua va a almacenarse por varios días para limpieza.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-white/5 rounded-2xl p-6 border border-white/10 text-center space-y-4">
+                        <div class="w-20 h-20 mx-auto rounded-full bg-brand-sage/30 flex items-center justify-center text-brand-sageLight text-3xl border border-brand-sageLight/40">
+                            <i class="fa-solid fa-bottle-droplet"></i>
+                        </div>
+                        <h4 class="font-serif text-xl text-brand-ivory">Envases de Recarga Fáciles</h4>
+                        <p class="text-xs text-brand-ivory/70 font-light leading-relaxed">
+                            Diseñados para verter directamente en el depósito sub-lavabo sin necesidad de desmontar la tubería ni contratar un plomero para la recarga.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="tinaco-sistema" class="py-24 px-6 lg:px-12 bg-brand-stone/40 border-b border-brand-stone">
+        <div class="max-w-7xl mx-auto space-y-16">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-xs tracking-[0.25em] font-semibold text-brand-sage uppercase">02 / Integración con la Vivienda</span>
+                <h2 class="font-serif text-3xl sm:text-5xl text-brand-petroleum font-normal">
+                    El Tinaco Exterior de Almacenamiento (500L)
+                </h2>
+                <p class="text-brand-graphite/80 text-base sm:text-lg font-light">
+                    El agua no se queda estancada en el baño. Ameyalatl la conduce hacia un depósito exterior instalado en el patio o jardín para un aprovechamiento cómodo y seguro.
+                </p>
+            </div>
+
+            <!-- Detailed Visual Card Breakdown of the Entire System Connection -->
+            <div class="bg-brand-ivory rounded-3xl border border-brand-stone p-8 sm:p-12 shadow-xl space-y-12">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-7 bg-brand-petroleum text-brand-ivory p-8 rounded-2xl space-y-6">
+                        <span class="text-xs uppercase tracking-widest text-brand-sageLight font-semibold">Circuito Completo por Gravedad</span>
+                        <h3 class="font-serif text-3xl text-brand-ivory">
+                            ¿Cómo se conecta el lavabo con el tinaco?
+                        </h3>
+
+                        <div class="space-y-4 text-xs font-light text-brand-ivory/80">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-sink text-brand-sageLight text-base mt-1"></i>
+                                <div>
+                                    <strong class="text-brand-ivory font-semibold block text-sm">1. Lavabo en el Baño</strong>
+                                    <p>El uso normal de lavado de manos genera efluentes grises que bajan hacia el filtro.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-filter text-brand-sageLight text-base mt-1"></i>
+                                <div>
+                                    <strong class="text-brand-ivory font-semibold block text-sm">2. Filtro Sub-Mueble & Solución</strong>
+                                    <p>Atrapa impurezas gruesas y agrega el acondicionador del depósito químico.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-arrow-right-from-bracket text-brand-sageLight text-base mt-1"></i>
+                                <div>
+                                    <strong class="text-brand-ivory font-semibold block text-sm">3. Tubería Pasante de Muro</strong>
+                                    <p>Un tubo de PVC/PEX de 1.5 pulgadas atraviesa la pared posterior hacia la fachada exterior.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-database text-brand-sageLight text-base mt-1"></i>
+                                <div>
+                                    <strong class="text-brand-ivory font-semibold block text-sm">4. Tinaco Exterior (500 Litros)</strong>
+                                    <p>Ubicado en el patio sobre una base elevada. Acumula el agua filtrada protegida de rayos UV.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-faucet text-brand-sageLight text-base mt-1"></i>
+                                <div>
+                                    <strong class="text-brand-ivory font-semibold block text-sm">5. Llave de Salida con Manguera</strong>
+                                    <p>Punto directo para conectar mangueras de riego o llenar cubetas para limpieza.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tinaco Exterior Technical Visual SVG -->
+                    <div class="lg:col-span-5 bg-brand-stone/30 rounded-2xl p-6 border border-brand-stone text-center space-y-4">
+                        <div class="w-full max-w-xs mx-auto bg-white p-4 rounded-xl border border-brand-stone shadow-sm">
+                            <svg viewBox="0 0 300 400" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Base Platform -->
+                                <rect x="50" y="340" width="200" height="30" fill="#E6E2DD" stroke="#1C2421" stroke-width="2" rx="4"/>
+                                <text x="150" y="360" fill="#1C2421" font-size="10" font-weight="bold" text-anchor="middle">Base de Concreto Elevada</text>
+
+                                <!-- Tinaco Body -->
+                                <rect x="70" y="80" width="160" height="250" rx="16" fill="#1C2421" stroke="#4A6B5D" stroke-width="3"/>
+                                <line x1="70" y1="130" x2="230" y2="130" stroke="#333" stroke-width="4"/>
+                                <line x1="70" y1="180" x2="230" y2="180" stroke="#333" stroke-width="4"/>
+                                <line x1="70" y1="230" x2="230" y2="230" stroke="#333" stroke-width="4"/>
+                                <line x1="70" y1="280" x2="230" y2="280" stroke="#333" stroke-width="4"/>
+
+                                <!-- Cap -->
+                                <rect x="110" y="60" width="80" height="20" rx="4" fill="#333" stroke="#8CA89A" stroke-width="2"/>
+
+                                <!-- Water Fill Gauge -->
+                                <rect x="80" y="140" width="140" height="180" rx="8" fill="#2B7A78" opacity="0.5"/>
+                                <text x="150" y="200" fill="#FFF" font-size="18" font-weight="bold" font-family="serif" text-anchor="middle">500 LITROS</text>
+                                <text x="150" y="220" fill="#DEF2F1" font-size="11" text-anchor="middle">Tanque de Almacenamiento</text>
+
+                                <!-- Inlet Pipe from Bathroom Wall -->
+                                <path d="M 10 100 L 120 100 L 120 80" stroke="#2B7A78" stroke-width="8" fill="none"/>
+                                <text x="50" y="90" fill="#0A2E2A" font-size="9" font-weight="bold">Entrada del Lavabo</text>
+
+                                <!-- Faucet Outlet -->
+                                <path d="M 230 300 L 265 300 L 265 320" stroke="#C5A059" stroke-width="8" fill="none"/>
+                                <circle cx="265" cy="290" r="8" fill="#C5A059"/>
+                                <text x="250" y="280" fill="#0A2E2A" font-size="9" font-weight="bold">Llave Jardín</text>
+                            </svg>
+                        </div>
+                        <span class="block text-xs font-semibold text-brand-petroleum uppercase tracking-wider">
+                            Capacidad: 500 Litros de Reuso
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="usos-practicos" class="py-24 px-6 lg:px-12 bg-brand-ivory">
+        <div class="max-w-7xl mx-auto space-y-16">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-brand-stone pb-8">
+                <div class="space-y-3 max-w-2xl">
+                    <span class="text-xs tracking-[0.25em] font-semibold text-brand-sage uppercase">03 / Aplicaciones Prácticas</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl text-brand-petroleum font-normal">
+                        ¿Cómo usar el agua almacenada en el tinaco?
+                    </h2>
+                </div>
+                <p class="text-brand-muted text-sm max-w-md font-light">
+                    Sustituye el consumo de agua potable de la red en tareas cotidianas que no requieren calidad de consumo humano.
+                </p>
+            </div>
+
+            <!-- Practical Use Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Use 1: Riego -->
+                <div class="bg-brand-stone/20 rounded-2xl p-6 border border-brand-stone flex flex-col justify-between space-y-6 hover:shadow-xl transition-all group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-sage/20 text-brand-sage flex items-center justify-center text-2xl group-hover:bg-brand-sage group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="font-serif text-xl text-brand-petroleum">Riego de Jardines y Pasto</h3>
+                        <p class="text-xs text-brand-graphite/80 leading-relaxed font-light">
+                            Conecta la manguera a la llave del tinaco exterior. La solución acondicionadora bio-nutritiva aporta minerales esenciales para plantas ornamentales.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-brand-stone text-[11px] text-brand-sage font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-check mr-1"></i> Uso Principal
+                    </div>
+                </div>
+
+                <!-- Use 2: Limpieza de patios -->
+                <div class="bg-brand-stone/20 rounded-2xl p-6 border border-brand-stone flex flex-col justify-between space-y-6 hover:shadow-xl transition-all group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-sage/20 text-brand-sage flex items-center justify-center text-2xl group-hover:bg-brand-sage group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-broom"></i>
+                        </div>
+                        <h3 class="font-serif text-xl text-brand-petroleum">Lavado de Patios y Cocheras</h3>
+                        <p class="text-xs text-brand-graphite/80 leading-relaxed font-light">
+                            Limpia banquetas, terrazas exteriores y áreas de mascotas sin remordimiento de desperdiciar agua limpia de la toma municipal.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-brand-stone text-[11px] text-brand-sage font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-check mr-1"></i> Ahorro Directo
+                    </div>
+                </div>
+
+                <!-- Use 3: Descarga de WC -->
+                <div class="bg-brand-stone/20 rounded-2xl p-6 border border-brand-stone flex flex-col justify-between space-y-6 hover:shadow-xl transition-all group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-sage/20 text-brand-sage flex items-center justify-center text-2xl group-hover:bg-brand-sage group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-toilet"></i>
+                        </div>
+                        <h3 class="font-serif text-xl text-brand-petroleum">Carga de Inodoros</h3>
+                        <p class="text-xs text-brand-graphite/80 leading-relaxed font-light">
+                            Opción para alimentar el tanque del WC secundario del hogar desde el tinaco exterior, una de las actividades con mayor consumo de agua.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-brand-stone text-[11px] text-brand-sage font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-check mr-1"></i> Circuito Sanitario
+                    </div>
+                </div>
+
+                <!-- Use 4: Lavado de autos -->
+                <div class="bg-brand-stone/20 rounded-2xl p-6 border border-brand-stone flex flex-col justify-between space-y-6 hover:shadow-xl transition-all group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-sage/20 text-brand-sage flex items-center justify-center text-2xl group-hover:bg-brand-sage group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-car"></i>
+                        </div>
+                        <h3 class="font-serif text-xl text-brand-petroleum">Lavado de Vehículos</h3>
+                        <p class="text-xs text-brand-graphite/80 leading-relaxed font-light">
+                            Llenado de cubetas directamente desde la llave del tinaco para el enjuague de automóviles, motocicletas y herramientas de trabajo.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-brand-stone text-[11px] text-brand-sage font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-check mr-1"></i> Enjuague Exterior
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="investigacion-expertos" class="py-24 px-6 lg:px-12 bg-brand-petroleum text-brand-ivory relative">
+        <div class="max-w-7xl mx-auto space-y-16">
+            
+            <div class="max-w-3xl space-y-4">
+                <span class="text-xs tracking-[0.25em] font-semibold text-brand-sageLight uppercase">04 / Sustento & Entrevistas</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal">
+                    Validación Teórica Mediante Consulta a Expertos
+                </h2>
+                <p class="text-brand-ivory/80 text-base sm:text-lg font-light leading-relaxed">
+                    Ameyalatl nació de observar el agua desperdiciada en el lavabo. Para diseñar la propuesta del filtro y asegurar que el agua almacenada en el tinaco de 500L sea adecuada para riego, realizamos entrevistas cualitativas con especialistas.
+                </p>
+            </div>
+
+            <!-- Expert Consultation Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="p-8 bg-brand-petroleumDark/90 rounded-2xl border border-white/10 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-sage/20 text-brand-sageLight flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <h3 class="font-serif text-xl text-brand-ivory">Consulta Biológica</h3>
+                    <p class="text-xs text-brand-ivory/70 leading-relaxed font-light">
+                        Entrevistamos a biólogos sobre los riesgos del almacenamiento prolongado de aguas grises. Recomendaron agregar la solución biocida en el depósito sub-lavabo para evitar la reproducción de bacterias patógenas en el tinaco exterior.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-brand-petroleumDark/90 rounded-2xl border border-white/10 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-sage/20 text-brand-sageLight flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h3 class="font-serif text-xl text-brand-ivory">Consulta Química</h3>
+                    <p class="text-xs text-brand-ivory/70 leading-relaxed font-light">
+                        Especialistas en química ambiental sugirieron el uso de carbón activado en la última etapa del filtro para capturar restos de surfactantes de jabón de manos y neutralizar olores.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-brand-petroleumDark/90 rounded-2xl border border-white/10 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-sage/20 text-brand-sageLight flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-faucet-drip"></i>
+                    </div>
+                    <h3 class="font-serif text-xl text-brand-ivory">Ingeniería Hidráulica</h3>
+                    <p class="text-xs text-brand-ivory/70 leading-relaxed font-light">
+                        Ingenieros validaron la conducción pasiva por gravedad hacia el tinaco exterior, recomendando sellos herméticos en la perforación del muro y tubería de 1.5 pulgadas para evitar estancamientos.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Transparent Methodology Note -->
+            <div class="p-6 bg-white/5 rounded-2xl border border-white/10 text-xs text-brand-ivory/70 italic max-w-4xl mx-auto text-center">
+                <p>
+                    <i class="fa-solid fa-circle-info mr-2 text-brand-sageLight"></i> Nota de Rigor Metodológico: El proyecto Ameyalatl es un prototipo conceptual sustentado en entrevistas cualitativas con docentes y profesionales en biología y química, así como en la consulta del marco normativo NOM-003-SEMARNAT-1997 para aguas residuales tratadas.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="calculadora" class="py-24 px-6 lg:px-12 bg-brand-ivory relative">
+        <div class="max-w-7xl mx-auto space-y-16">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-xs tracking-[0.25em] font-semibold text-brand-sage uppercase">05 / Calculadora de Captación</span>
+                <h2 class="font-serif text-3xl sm:text-5xl text-brand-petroleum font-normal">
+                    ¿Cuánta agua podrías almacenar en tu tinaco?
+                </h2>
+                <p class="text-brand-graphite/80 text-base sm:text-lg font-light">
+                    Ajusta las variables de tu hogar para estimar cuántos litros de agua gris podrías enviar mensualmente al tinaco exterior de 500L.
+                </p>
+            </div>
+
+            <!-- Calculator Layout -->
+            <div class="bg-brand-stone/30 rounded-3xl p-8 sm:p-12 border border-brand-stone shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Controls Column -->
+                <div class="lg:col-span-6 space-y-6">
+                    <h3 class="font-serif text-xl text-brand-petroleum border-b border-brand-stone pb-3">
+                        Uso Diario del Lavabo del Baño
+                    </h3>
+
+                    <!-- Slider 1 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs sm:text-sm">
+                            <label for="calc-personas" class="text-brand-graphite font-medium">Personas en la casa</label>
+                            <span id="val-personas" class="font-mono text-brand-sage font-bold">4 personas</span>
+                        </div>
+                        <input type="range" id="calc-personas" min="1" max="10" value="4" class="w-full">
+                    </div>
+
+                    <!-- Slider 2 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs sm:text-sm">
+                            <label for="calc-usos" class="text-brand-graphite font-medium">Usos diarios por persona</label>
+                            <span id="val-usos" class="font-mono text-brand-sage font-bold">5 veces/día</span>
+                        </div>
+                        <input type="range" id="calc-usos" min="1" max="15" value="5" class="w-full">
+                    </div>
+
+                    <!-- Slider 3 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs sm:text-sm">
+                            <label for="calc-segundos" class="text-brand-graphite font-medium">Duración por uso (segundos)</label>
+                            <span id="val-segundos" class="font-mono text-brand-sage font-bold">30 segundos</span>
+                        </div>
+                        <input type="range" id="calc-segundos" min="10" max="90" step="5" value="30" class="w-full">
+                    </div>
+
+                    <!-- Slider 4 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs sm:text-sm">
+                            <label for="calc-caudal" class="text-brand-graphite font-medium">Caudal del grifo (L/min)</label>
+                            <span id="val-caudal" class="font-mono text-brand-sage font-bold">6 L/min</span>
+                        </div>
+                        <input type="range" id="calc-caudal" min="3" max="12" step="0.5" value="6" class="w-full">
+                    </div>
+
+                    <!-- Slider 5 -->
+                    <div class="space-y-2 pt-2 border-t border-brand-stone">
+                        <div class="flex justify-between text-xs sm:text-sm">
+                            <label for="calc-eficiencia" class="text-brand-petroleum font-semibold">Eficiencia de captación del filtro</label>
+                            <span id="val-eficiencia" class="font-mono text-brand-sage font-bold">75%</span>
+                        </div>
+                        <input type="range" id="calc-eficiencia" min="30" max="95" step="5" value="75" class="w-full">
+                    </div>
+
+                    <div class="flex items-center gap-4 pt-2">
+                        <button id="btn-reset-calc" class="px-4 py-2 rounded-full border border-brand-stone text-xs uppercase tracking-wider text-brand-muted hover:text-brand-petroleum transition-colors">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> Restablecer
+                        </button>
+                        <button id="btn-copy-calc" class="px-4 py-2 rounded-full bg-brand-sage/20 border border-brand-sage/30 text-xs uppercase tracking-wider text-brand-sage hover:bg-brand-sage hover:text-white transition-all">
+                            <i class="fa-regular fa-copy mr-1"></i> Copiar Estimación
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Display -->
+                <div class="lg:col-span-6 flex flex-col justify-between bg-brand-petroleum text-brand-ivory p-8 rounded-2xl border border-white/10 space-y-6">
+                    
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-brand-sageLight font-semibold">Proyección para Tinaco Exterior</span>
+                        <h4 class="font-serif text-2xl text-brand-ivory mt-1">Volumen Acumulable</h4>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+                            <span class="text-[11px] text-brand-ivory/60 uppercase block">Consumo Bruto en Lavabo (Día)</span>
+                            <span id="res-diario-total" class="font-serif text-3xl text-brand-ivory">30.0 Litros</span>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-brand-sage/30 border border-brand-sageLight/40 space-y-1">
+                            <span class="text-[11px] text-brand-sageLight uppercase font-semibold block">Agua Tratada al Tinaco (Día)</span>
+                            <span id="res-diario-recuperable" class="font-serif text-4xl text-brand-sageLight font-bold">22.5 Litros</span>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+                            <span class="text-[11px] text-brand-ivory/60 uppercase block">Acumulado Mensual en Tinaco (30 días)</span>
+                            <span id="res-mensual-recuperable" class="font-serif text-3xl text-brand-ivory">675 Litros</span>
+                        </div>
+                    </div>
+
+                    <!-- Tinaco Visual Capacity Bar -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs text-brand-ivory/70">
+                            <span>Llenado del Tinaco de 500L (al mes)</span>
+                            <span id="bar-tinacos-count" class="font-semibold text-brand-sageLight">1.35 Tinacos llenos</span>
+                        </div>
+                        <div class="w-full h-3 bg-white/10 rounded-full overflow-hidden p-0.5">
+                            <div id="visual-bar" class="h-full bg-brand-sageLight rounded-full transition-all duration-500" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-[10px] text-brand-ivory/50 italic leading-relaxed">
+                        * Estimación teórica. El almacenamiento real dependerá del uso efectivo del lavabo y la capacidad del depósito.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-20 px-6 lg:px-12 bg-brand-stone/30 border-y border-brand-stone">
+        <div class="max-w-5xl mx-auto space-y-8">
+            
+            <div class="flex items-center gap-3 text-brand-sage">
+                <i class="fa-solid fa-shield-halved text-xl"></i>
+                <span class="text-xs tracking-[0.25em] font-semibold uppercase">06 / Normativa y Seguridad</span>
+            </div>
+
+            <h2 class="font-serif text-3xl text-brand-petroleum">
+                Criterios de Operación y Normativa Aplicable
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-brand-graphite/80 font-light">
+                <div class="p-6 bg-brand-ivory rounded-xl border border-brand-stone space-y-2">
+                    <h3 class="font-serif text-sm font-semibold text-brand-petroleum uppercase tracking-wider">Agua Estrictamente No Potable</h3>
+                    <p>El agua recuperada en el tinaco exterior bajo ningún motivo debe ser ingerida, empleada para cocinar o para el aseo personal directo.</p>
+                </div>
+
+                <div class="p-6 bg-brand-ivory rounded-xl border border-brand-stone space-y-2">
+                    <h3 class="font-serif text-sm font-semibold text-brand-petroleum uppercase tracking-wider">Circuito Independiente</h3>
+                    <p>La tubería pasante hacia el tinaco no se conecta con la tubería de agua potable de la vivienda, previniendo cualquier contaminación cruzada.</p>
+                </div>
+
+                <div class="p-6 bg-brand-ivory rounded-xl border border-brand-stone space-y-2">
+                    <h3 class="font-serif text-sm font-semibold text-brand-petroleum uppercase tracking-wider">Uso de Jabones Biodegradables</h3>
+                    <p>Se aconseja emplear jabones de manos biodegradables para prolongar la vida útil del carbón activado del filtro cilíndrico.</p>
+                </div>
+
+                <div class="p-6 bg-brand-ivory rounded-xl border border-brand-stone space-y-2">
+                    <h3 class="font-serif text-sm font-semibold text-brand-petroleum uppercase tracking-wider">Mantenimiento Semestral</h3>
+                    <p>Inspección periódica del lecho de carbón y reemplazo del envase del depósito químico auxiliar cuando se agote.</p>
+                </div>
+            </div>
+
+            <!-- Official Sources List -->
+            <div class="pt-8 border-t border-brand-stone space-y-4">
+                <h3 class="font-serif text-xl text-brand-petroleum">Fuentes Oficiales Consultadas</h3>
+                <div class="space-y-3 text-xs text-brand-graphite/80 font-light">
+                    <div class="flex flex-col sm:flex-row justify-between gap-1">
+                        <span><strong>SEMARNAT (1997).</strong> NOM-003-SEMARNAT-1997: Límites permisibles para aguas residuales tratadas reusadas en servicios al público.</span>
+                        <a href="https://www.gob.mx/semarnat" target="_blank" rel="noopener" class="text-brand-sage hover:underline whitespace-nowrap">gob.mx/semarnat <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between gap-1">
+                        <span><strong>CONAGUA (2023).</strong> Estadísticas del Agua en México. Comisión Nacional del Agua.</span>
+                        <a href="https://www.gob.mx/conagua" target="_blank" rel="noopener" class="text-brand-sage hover:underline whitespace-nowrap">gob.mx/conagua <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-brand-petroleumDark text-brand-ivory/60 py-12 px-6 lg:px-12 text-xs border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-brand-sage text-brand-ivory flex items-center justify-center font-serif text-xs font-bold">
+                    A
+                </div>
+                <span class="font-serif text-sm tracking-wider uppercase text-brand-ivory">Ameyalatl</span>
+                <span>— Filtro de Lavabo & Sistema de Almacenamiento en Tinaco Exterior</span>
+            </div>
+            
+            <div>
+                <span>© 2026 Ameyalatl. Propuesta de Innovación e Ingeniería Sustentable.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- Navbar scroll background effect ---
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('glass-panel', 'shadow-md', 'py-3');
+                    navbar.classList.remove('py-4');
+                } else {
+                    navbar.classList.remove('glass-panel', 'shadow-md', 'py-3');
+                    navbar.classList.add('py-4');
+                }
+            });
+
+            // --- Mobile Drawer Menu ---
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileDrawer = document.getElementById('mobile-drawer');
+            mobileBtn.addEventListener('click', function() {
+                mobileDrawer.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileDrawer.classList.add('hidden');
+                });
+            });
+
+            // --- Interactive Water Calculator Logic ---
+            const inputPersonas = document.getElementById('calc-personas');
+            const inputUsos = document.getElementById('calc-usos');
+            const inputSegundos = document.getElementById('calc-segundos');
+            const inputCaudal = document.getElementById('calc-caudal');
+            const inputEficiencia = document.getElementById('calc-eficiencia');
+
+            const valPersonas = document.getElementById('val-personas');
+            const valUsos = document.getElementById('val-usos');
+            const valSegundos = document.getElementById('val-segundos');
+            const valCaudal = document.getElementById('val-caudal');
+            const valEficiencia = document.getElementById('val-eficiencia');
+
+            const resDiarioTotal = document.getElementById('res-diario-total');
+            const resDiarioRecuperable = document.getElementById('res-diario-recuperable');
+            const resMensualRecuperable = document.getElementById('res-mensual-recuperable');
+            const visualBar = document.getElementById('visual-bar');
+            const barTinacosCount = document.getElementById('bar-tinacos-count');
+
+            function calculateImpact() {
+                const personas = parseInt(inputPersonas.value);
+                const usos = parseInt(inputUsos.value);
+                const segundos = parseInt(inputSegundos.value);
+                const caudal = parseFloat(inputCaudal.value);
+                const eficiencia = parseInt(inputEficiencia.value);
+
+                // Update Labels
+                valPersonas.textContent = `${personas} ${personas === 1 ? 'persona' : 'personas'}`;
+                valUsos.textContent = `${usos} ${usos === 1 ? 'vez/día' : 'veces/día'}`;
+                valSegundos.textContent = `${segundos} segundos`;
+                valCaudal.textContent = `${caudal} L/min`;
+                valEficiencia.textContent = `${eficiencia}%`;
+
+                // Calculate Volume: personas * usos * (segundos/60) * caudal
+                const minutosUsoDiario = (segundos / 60) * usos * personas;
+                const litrosDiariosTotales = minutosUsoDiario * caudal;
+                const litrosDiariosRecuperables = litrosDiariosTotales * (eficiencia / 100);
+                const litrosMensualesRecuperables = litrosDiariosRecuperables * 30;
+
+                // Tinacos equivalents
